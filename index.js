@@ -1,11 +1,14 @@
-require('dotenv').config() // Load .env file
 const axios = require('axios')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
+// variables
+const coinId = 'vigorus';
+const gildId = '772338781045915650';
+//const clientId = '';
+const botSecret = 'OTQ1OTU0ODkyODIzMDE5NTcz.YhXrJQ.9eFbVdz6DILQj360AYyPod2yGk4';
+
 function getPrices() {
-
-
 	// API for price data.
 	axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${process.env.PREFERRED_CURRENCY}&ids=${process.env.COIN_ID}`).then(res => {
 		// If we got a valid response
@@ -21,9 +24,9 @@ function getPrices() {
 				}
 			})
 
-			client.guilds.find(guild => guild.id === process.env.SERVER_ID).me.setNickname(`${(currentPrice).toLocaleString().replace(/,/g,process.env.THOUSAND_SEPARATOR)}${process.env.CURRENCY_SYMBOL}`)
-
 			console.log('Updated price to', currentPrice)
+			current.guilds.find(guild.id === '${guildId}').me.setNickname('${symbol} $${(currentPrice).toLocaleString().replace(/,/
+										      g,',')}')
 		}
 		else
 			console.log('Could not load player count data for', process.env.COIN_ID)
@@ -41,4 +44,5 @@ client.on('ready', () => {
 })
 
 // Login to Discord
-client.login(process.env.DISCORD_TOKEN)
+// https://discord.com/api/oauth2/authorize?client_id=945954892823019573permissions=0&scope=bot%20applications.commands
+client.login('${botSecret}')
